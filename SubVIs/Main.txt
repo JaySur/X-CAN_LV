@@ -1,0 +1,2032 @@
+<VI syntaxVersion=11 LVversion=15008000 revision=578 name="Main.vi">
+<TITLE>X-CAN [CAN协议与数据离线分析平台]-by 许晓通</TITLE>
+<HELP_PATH></HELP_PATH>
+<HELP_TAG></HELP_TAG>
+<RTM_PATH type="default"></RTM_PATH>
+<DESC></DESC>
+<CONTENT>
+	<GROUPER>
+		<PARTS>
+		</PARTS></GROUPER>
+	<CONTROL ID=94 type="XY图" name="时域主图">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=8022 order=0 type="">
+				<CONTROL ID=231 type="树形" >
+					<DESC></DESC>
+					<TIP></TIP>
+					<PARTS>
+						<GROUPER>
+							<PARTS>
+							</PARTS></GROUPER>
+					</PARTS>
+					<PRIV>
+						<CELL_FONTS>
+							[-2 -2]<FONT predef=APPFONT color=000000>
+							[-1 -2]<FONT predef=APPFONT style='B' color=000000>
+						</CELL_FONTS>
+						<ROW_HEADER>
+						</ROW_HEADER>
+						<COL_HEADER>
+							<STRING>游标：</STRING>
+							<STRING>X</STRING>
+							<STRING>Y</STRING>
+						</COL_HEADER>
+						<STRINGS>
+						</STRINGS>
+					</PRIV>
+				</CONTROL>
+			</PART>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>时域主图</STEXT></LABEL></PART>
+		</PARTS>
+		<PRIV>
+			<PLOTS><STRING>MMMC_TgtGrs</STRING><STRING>MMMC_CurGrs</STRING><STRING>无</STRING><STRING>无</STRING><STRING>无</STRING><STRING>无</STRING><STRING>无</STRING><STRING>无</STRING></PLOTS>
+			<SCALE_NAMES><STRING>时间</STRING><STRING>MMMC_TgtGrs/</STRING><STRING>MMMC_CurGrs/</STRING><STRING>MMMC_isSft/</STRING><STRING>SynBSftProcess/</STRING><STRING>SW6/</STRING><STRING>SW5/</STRING><STRING>ISG_DC_Im_Cur/A</STRING><STRING>DM_DC_Im_Cur/A</STRING></SCALE_NAMES>
+		</PRIV>
+	</CONTROL>
+	<CONTROL ID=230 type="多列列表框" name="已选信号列表">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<GROUPER>
+				<PARTS>
+				</PARTS></GROUPER>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT><FONT predef=DLGFONT color=100000C>已选信号列表</STEXT></LABEL></PART>
+		</PARTS>
+		<PRIV>
+			<CELL_FONTS>
+				[-2 -2]<FONT predef=DLGFONT color=000000>
+			</CELL_FONTS>
+			<ROW_HEADER>
+			</ROW_HEADER>
+			<COL_HEADER>
+				<STRING>信号</STRING>
+				<STRING>单位</STRING>
+			</COL_HEADER>
+			<STRINGS>
+			</STRINGS>
+		</PRIV>
+	</CONTROL>
+	<CONTROL ID=79 type="布尔" name="退出">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=22 order=0 type="布尔文本"><MLABEL><FONT predef=APPFONT color=FF0000><STRINGS><STRING>退出</STRING></STRINGS></MLABEL></PART>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT><FONT predef=DLGFONT>退出</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=79 type="布尔" name="绘图">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=22 order=0 type="布尔文本"><MLABEL><STRINGS><STRING>绘图</STRING></STRINGS></MLABEL></PART>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>绘图</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=82 type="数组" name="全部信号数组">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>全部信号数组</STEXT></LABEL></PART>
+		</PARTS>
+		<DEFAULT>
+			<ARRAY nElems=0>
+			</ARRAY>
+		</DEFAULT>
+		<CONTENT>
+			<CONTROL ID=81 type="字符串" name="String">
+				<DESC></DESC>
+				<TIP></TIP>
+				<PARTS>
+					<PART ID=11 order=0 type="文本"><LABEL><STEXT></STEXT></LABEL></PART>
+					<PART ID=82 order=0 type="标题"><LABEL><STEXT>String</STEXT></LABEL></PART>
+				</PARTS>
+				<DEFAULT><SAME_AS_LABEL></DEFAULT>
+			</CONTROL>
+		</CONTENT>
+	</CONTROL>
+	<CONTROL ID=82 type="数组" name="已选信号数组">
+		<DESC>0-Signal<LF>
+1-报文+ID<LF>
+2-ID（不带0x的16进制）<LF>
+3-起始位<LF>
+4-长度<LF>
+5-格式<LF>
+6-缩放系数<LF>
+7-偏移量<LF>
+8-最小值<LF>
+9-最大值<LF>
+10-单位<LF>
+11-节点</DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>已选信号数组</STEXT></LABEL></PART>
+		</PARTS>
+		<DEFAULT>
+			<ARRAY nElems=0>
+			</ARRAY>
+		</DEFAULT>
+		<CONTENT>
+			<CONTROL ID=81 type="字符串" name="String">
+				<DESC></DESC>
+				<TIP></TIP>
+				<PARTS>
+					<PART ID=11 order=0 type="文本"><LABEL><STEXT></STEXT></LABEL></PART>
+					<PART ID=82 order=0 type="标题"><LABEL><STEXT>String</STEXT></LABEL></PART>
+				</PARTS>
+				<DEFAULT><SAME_AS_LABEL></DEFAULT>
+			</CONTROL>
+		</CONTENT>
+	</CONTROL>
+	<CONTROL ID=91 type="路径" name="CAN离线数据">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=8019 order=0 type="浏览按钮">
+				<CONTROL ID=79 type="布尔" >
+					<DESC></DESC>
+					<TIP></TIP>
+					<PARTS>
+					</PARTS>
+				</CONTROL>
+			</PART>
+			<PART ID=11 order=0 type="文本"><LABEL><STEXT><FONT predef=DLGFONT color=100000C></STEXT></LABEL></PART>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT><FONT predef=DLGFONT>CAN离线数据</STEXT></LABEL></PART>
+		</PARTS>
+		<PRIV>
+			<PROMPT></PROMPT>
+			<MTCH_PTN>*.txt</MTCH_PTN>
+			<PTN_LBEL>CAN File</PTN_LBEL>
+			<STRT_PTH><PATH type="absolute"></PATH></STRT_PTH>
+			<PTH_BTN_LBL>加载</PTH_BTN_LBL>
+		</PRIV>
+		<DEFAULT>
+			<PATH type="absolute"></PATH>
+		</DEFAULT>
+	</CONTROL>
+	<CONTROL ID=91 type="路径" name="DBC文件路径">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=8019 order=0 type="浏览按钮">
+				<CONTROL ID=79 type="布尔" >
+					<DESC></DESC>
+					<TIP></TIP>
+					<PARTS>
+					</PARTS>
+				</CONTROL>
+			</PART>
+			<PART ID=11 order=0 type="文本"><LABEL><STEXT><FONT predef=DLGFONT color=100000C></STEXT></LABEL></PART>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT><FONT predef=DLGFONT>DBC文件路径</STEXT></LABEL></PART>
+		</PARTS>
+		<PRIV>
+			<PROMPT></PROMPT>
+			<MTCH_PTN>*.dbc</MTCH_PTN>
+			<PTN_LBEL>DBC File</PTN_LBEL>
+			<STRT_PTH><PATH type="absolute"></PATH></STRT_PTH>
+			<PTH_BTN_LBL>加载</PTH_BTN_LBL>
+		</PRIV>
+		<DEFAULT>
+			<PATH type="absolute"></PATH>
+		</DEFAULT>
+	</CONTROL>
+	<CONTROL ID=80 type="数值" name="信号数">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>信号数</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=80 type="数值" name="报文数">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>报文数</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<LABEL><STEXT><FONT size=39>X-CAN离线分析平台</STEXT></LABEL>
+	<LABEL><STEXT>——by 许晓通</STEXT></LABEL>
+	<CONTROL ID=79 type="布尔" name="清空选择">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=22 order=0 type="布尔文本"><MLABEL><STRINGS><STRING>清空</STRING></STRINGS></MLABEL></PART>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>清空选择</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=79 type="布尔" name="加载dbc">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=22 order=0 type="布尔文本"><MLABEL><STRINGS><STRING>加载DBC</STRING></STRINGS></MLABEL></PART>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>空白按钮</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=79 type="布尔" name="配置纵坐标">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=22 order=0 type="布尔文本"><MLABEL><STRINGS><STRING>配置Y轴</STRING></STRINGS></MLABEL></PART>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>配置纵坐标</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=231 type="树形" name="DBC一览树形">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<GROUPER>
+				<PARTS>
+				</PARTS></GROUPER>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>DBC一览树形</STEXT></LABEL></PART>
+		</PARTS>
+		<PRIV>
+			<CELL_FONTS>
+				[-2 -2]<FONT predef=APPFONT color=000000>
+			</CELL_FONTS>
+			<ROW_HEADER>
+			</ROW_HEADER>
+			<COL_HEADER>
+				<STRING>报文及信号</STRING>
+				<STRING>起始位</STRING>
+				<STRING>长度</STRING>
+				<STRING>格式</STRING>
+				<STRING>缩放系数</STRING>
+				<STRING>偏移量</STRING>
+				<STRING>最小值</STRING>
+				<STRING>最大值</STRING>
+				<STRING>单位</STRING>
+				<STRING>节点</STRING>
+			</COL_HEADER>
+			<STRINGS>
+			</STRINGS>
+		</PRIV>
+	</CONTROL>
+	<CONTROL ID=80 type="数值" name="已选数量">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>已选数量</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=79 type="布尔" name="清空主图">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=22 order=0 type="布尔文本"><MLABEL><STRINGS><STRING>清空<LF>
+主图</STRING></STRINGS></MLABEL></PART>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>清空主图</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=87 type="Enum" name="Y轴配置选择">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=12 order=0 type="下拉列表文本"><MLABEL><STRINGS></STRINGS></MLABEL></PART>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>Y轴配置选择</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=80 type="数值" name="图例与游标宽度">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>图例与游标宽度</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<LABEL><STEXT>V1.0</STEXT></LABEL>
+	<CONTROL ID=81 type="字符串" name="绘图提示语">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=11 order=0 type="文本"><LABEL><STEXT><FONT style='I' size=36 color=FF0000></STEXT></LABEL></PART>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>绘图提示语</STEXT></LABEL></PART>
+		</PARTS>
+		<DEFAULT><STRING>让我看看有多少数据...</STRING></DEFAULT>
+	</CONTROL>
+	<CONTROL ID=231 type="树形" name="所有ValueTable">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<GROUPER>
+				<PARTS>
+				</PARTS></GROUPER>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>所有ValueTable</STEXT></LABEL></PART>
+		</PARTS>
+		<PRIV>
+			<CELL_FONTS>
+				[-2 -2]<FONT predef=APPFONT color=000000>
+			</CELL_FONTS>
+			<ROW_HEADER>
+			</ROW_HEADER>
+			<COL_HEADER>
+			</COL_HEADER>
+			<STRINGS>
+				<STRING>MMMC_TgtGrs</STRING>
+				<STRING>0</STRING>
+				<STRING>R0E0</STRING>
+				<STRING>1</STRING>
+				<STRING>R0E1</STRING>
+				<STRING>16</STRING>
+				<STRING>R1E0</STRING>
+				<STRING>32</STRING>
+				<STRING>R2E0</STRING>
+				<STRING>33</STRING>
+				<STRING>R2E1</STRING>
+				<STRING>MMMCCtrlMethod_HCU</STRING>
+				<STRING>0</STRING>
+				<STRING>不控制</STRING>
+				<STRING>1</STRING>
+				<STRING>手动控制</STRING>
+				<STRING>2</STRING>
+				<STRING>单参数自动控制</STRING>
+				<STRING>3</STRING>
+				<STRING>双参数自动控制</STRING>
+				<STRING>PumpSwitch</STRING>
+				<STRING>0</STRING>
+				<STRING>PumpOff</STRING>
+				<STRING>1</STRING>
+				<STRING>PumpOn</STRING>
+				<STRING>EngineSyn</STRING>
+				<STRING>0</STRING>
+				<STRING>E0</STRING>
+				<STRING>1</STRING>
+				<STRING>E1</STRING>
+				<STRING>RingSyn</STRING>
+				<STRING>0</STRING>
+				<STRING>R0</STRING>
+				<STRING>1</STRING>
+				<STRING>R1</STRING>
+				<STRING>2</STRING>
+				<STRING>R2</STRING>
+				<STRING>MMMC_SftFailed</STRING>
+				<STRING>0</STRING>
+				<STRING>-</STRING>
+				<STRING>1</STRING>
+				<STRING>换挡失败</STRING>
+				<STRING>MMMCCtrlMethod_HCU</STRING>
+				<STRING>0</STRING>
+				<STRING>不控制</STRING>
+				<STRING>1</STRING>
+				<STRING>手动控制</STRING>
+				<STRING>2</STRING>
+				<STRING>单参数自动控制</STRING>
+				<STRING>3</STRING>
+				<STRING>双参数自动控制</STRING>
+				<STRING>MMMC_TgtGrs</STRING>
+				<STRING>0</STRING>
+				<STRING>R0E0</STRING>
+				<STRING>1</STRING>
+				<STRING>R0E1</STRING>
+				<STRING>16</STRING>
+				<STRING>R1E0</STRING>
+				<STRING>32</STRING>
+				<STRING>R2E0</STRING>
+				<STRING>33</STRING>
+				<STRING>R2E1</STRING>
+				<STRING>MMMC_CurGrs</STRING>
+				<STRING>0</STRING>
+				<STRING>R0E0</STRING>
+				<STRING>1</STRING>
+				<STRING>R0E1</STRING>
+				<STRING>16</STRING>
+				<STRING>R1E0</STRING>
+				<STRING>32</STRING>
+				<STRING>R2E0</STRING>
+				<STRING>33</STRING>
+				<STRING>R2E1</STRING>
+				<STRING>3</STRING>
+				<STRING>R0E01</STRING>
+				<STRING>19</STRING>
+				<STRING>R1E01</STRING>
+				<STRING>35</STRING>
+				<STRING>R2E01</STRING>
+				<STRING>48</STRING>
+				<STRING>R01E0</STRING>
+				<STRING>49</STRING>
+				<STRING>R01E1</STRING>
+				<STRING>51</STRING>
+				<STRING>R01E01</STRING>
+				<STRING>64</STRING>
+				<STRING>R02E0</STRING>
+				<STRING>65</STRING>
+				<STRING>R02E1</STRING>
+				<STRING>67</STRING>
+				<STRING>R02E01</STRING>
+				<STRING>MMMC_isSft</STRING>
+				<STRING>0</STRING>
+				<STRING>非在换挡</STRING>
+				<STRING>1</STRING>
+				<STRING>换挡中</STRING>
+				<STRING>SynBSftProcess</STRING>
+				<STRING>0</STRING>
+				<STRING>None</STRING>
+				<STRING>1</STRING>
+				<STRING>0to1</STRING>
+				<STRING>2</STRING>
+				<STRING>0to2</STRING>
+				<STRING>16</STRING>
+				<STRING>1to0</STRING>
+				<STRING>32</STRING>
+				<STRING>2to0</STRING>
+				<STRING>SynBMotor2Rotating</STRING>
+				<STRING>0</STRING>
+				<STRING>SftMotorStopped</STRING>
+				<STRING>1</STRING>
+				<STRING>SftMotorRotating</STRING>
+				<STRING>SynASftProcess</STRING>
+				<STRING>0</STRING>
+				<STRING>None</STRING>
+				<STRING>1</STRING>
+				<STRING>0to1</STRING>
+				<STRING>2</STRING>
+				<STRING>0to2</STRING>
+				<STRING>16</STRING>
+				<STRING>1to0</STRING>
+				<STRING>32</STRING>
+				<STRING>2to0</STRING>
+				<STRING>SynAMotor1Rotating</STRING>
+				<STRING>0</STRING>
+				<STRING>SftMotorStopped</STRING>
+				<STRING>1</STRING>
+				<STRING>SftMotorRotating</STRING>
+				<STRING>EnginePos</STRING>
+				<STRING>0</STRING>
+				<STRING>E0</STRING>
+				<STRING>1</STRING>
+				<STRING>E1</STRING>
+				<STRING>RingPos</STRING>
+				<STRING>0</STRING>
+				<STRING>R0</STRING>
+				<STRING>1</STRING>
+				<STRING>R1</STRING>
+				<STRING>2</STRING>
+				<STRING>R2</STRING>
+				<STRING>PC_GCUEnable</STRING>
+				<STRING>0</STRING>
+				<STRING>关管</STRING>
+				<STRING>1</STRING>
+				<STRING>开管</STRING>
+				<STRING>PC_GCUCtrlMode</STRING>
+				<STRING>0</STRING>
+				<STRING>自由模式</STRING>
+				<STRING>1</STRING>
+				<STRING>扭矩模式</STRING>
+				<STRING>2</STRING>
+				<STRING>转速模式</STRING>
+				<STRING>PC_MCUEnable</STRING>
+				<STRING>0</STRING>
+				<STRING>关管</STRING>
+				<STRING>1</STRING>
+				<STRING>开管</STRING>
+				<STRING>PC_MCUCtrlMode</STRING>
+				<STRING>0</STRING>
+				<STRING>自由模式</STRING>
+				<STRING>1</STRING>
+				<STRING>扭矩模式</STRING>
+				<STRING>2</STRING>
+				<STRING>转速模式</STRING>
+				<STRING>ISG_EnableMCU</STRING>
+				<STRING>0</STRING>
+				<STRING>关管</STRING>
+				<STRING>1</STRING>
+				<STRING>开管</STRING>
+				<STRING>ISG_ShiftStatus</STRING>
+				<STRING>0</STRING>
+				<STRING>N挡</STRING>
+				<STRING>1</STRING>
+				<STRING>D挡</STRING>
+				<STRING>2</STRING>
+				<STRING>R挡</STRING>
+				<STRING>ISG_ReqEMState1</STRING>
+				<STRING>0</STRING>
+				<STRING>自由模式</STRING>
+				<STRING>1</STRING>
+				<STRING>扭矩模式</STRING>
+				<STRING>2</STRING>
+				<STRING>转速模式</STRING>
+				<STRING>DM_ShiftStatus</STRING>
+				<STRING>0</STRING>
+				<STRING>N挡</STRING>
+				<STRING>1</STRING>
+				<STRING>D挡</STRING>
+				<STRING>2</STRING>
+				<STRING>R挡</STRING>
+				<STRING>DM_ReqEMState1</STRING>
+				<STRING>0</STRING>
+				<STRING>自由模式</STRING>
+				<STRING>1</STRING>
+				<STRING>扭矩模式</STRING>
+				<STRING>2</STRING>
+				<STRING>转速模式</STRING>
+				<STRING>DM_EnableMCU</STRING>
+				<STRING>0</STRING>
+				<STRING>关管</STRING>
+				<STRING>1</STRING>
+				<STRING>开管</STRING>
+			</STRINGS>
+		</PRIV>
+	</CONTROL>
+	<CONTROL ID=79 type="布尔" name="查看已选值表">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=22 order=0 type="布尔文本"><MLABEL><STRINGS><STRING>查看已选值表</STRING></STRINGS></MLABEL></PART>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>查看已选值表</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=79 type="布尔" name="查看所有值表">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=22 order=0 type="布尔文本"><MLABEL><STRINGS><STRING>查看所有值表</STRING></STRINGS></MLABEL></PART>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>查看所有值表</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=82 type="数组" name="值表数组">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>值表数组</STEXT></LABEL></PART>
+		</PARTS>
+		<DEFAULT>
+			<ARRAY nElems=0>
+			</ARRAY>
+		</DEFAULT>
+		<CONTENT>
+			<CONTROL ID=81 type="字符串" name="String">
+				<DESC></DESC>
+				<TIP></TIP>
+				<PARTS>
+					<PART ID=11 order=0 type="文本"><LABEL><STEXT></STEXT></LABEL></PART>
+					<PART ID=82 order=0 type="标题"><LABEL><STEXT>String</STEXT></LABEL></PART>
+				</PARTS>
+				<DEFAULT><SAME_AS_LABEL></DEFAULT>
+			</CONTROL>
+		</CONTENT>
+	</CONTROL>
+	<CONTROL ID=88 type="滑动杆" name="水平进度条">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>水平进度条</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=81 type="字符串" name="进度数值">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=11 order=0 type="文本"><LABEL><STEXT><FONT style='I' size=36 color=009F09></STEXT></LABEL></PART>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>进度数值</STEXT></LABEL></PART>
+		</PARTS>
+		<DEFAULT><STRING>0%</STRING></DEFAULT>
+	</CONTROL>
+	<CONTROL ID=82 type="数组" name="加载的CAN离线数据数组">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>加载的CAN离线数据数组</STEXT></LABEL></PART>
+		</PARTS>
+		<CONTENT>
+			<CONTROL ID=80 type="数值" name="">
+				<DESC></DESC>
+				<TIP></TIP>
+				<PARTS>
+					<PART ID=82 order=0 type="标题"><LABEL><STEXT></STEXT></LABEL></PART>
+				</PARTS>
+			</CONTROL>
+		</CONTENT>
+	</CONTROL>
+	<CONTROL ID=79 type="布尔" name="离线数据已加载">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>离线数据已加载</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+</CONTENT>
+<BDCONTENT>
+	<NODE ID=182 type="CtlRefConst" name="时域主图">
+		<DESC></DESC>
+	</NODE>
+	<NODE ID=41 type="Sequence">
+		<DESC></DESC>
+		<BDCONTENT>
+			<CONTROL ID=79 type="假常量" name="值">
+				<DESC></DESC>
+				<TIP></TIP>
+				<PARTS>
+				</PARTS>
+			</CONTROL>
+			<NODE ID=140 type="Property Node">
+				<DESC></DESC>
+			</NODE>
+			<NODE ID=182 type="CtlRefConst" name="离线数据已加载">
+				<DESC></DESC>
+			</NODE>
+			<CONTROL ID=91 type="路径常量" name="值">
+				<DESC></DESC>
+				<TIP></TIP>
+				<PARTS>
+					<PART ID=11 order=0 type="文本"><LABEL><STEXT></STEXT></LABEL></PART>
+				</PARTS>
+				<PRIV>
+					<PROMPT></PROMPT>
+					<MTCH_PTN></MTCH_PTN>
+					<PTN_LBEL></PTN_LBEL>
+					<STRT_PTH><PATH type="absolute"></PATH></STRT_PTH>
+					<PTH_BTN_LBL></PTH_BTN_LBL>
+				</PRIV>
+				<DEFAULT>
+					<PATH type="absolute"></PATH>
+				</DEFAULT>
+			</CONTROL>
+			<NODE ID=140 type="Property Node">
+				<DESC></DESC>
+			</NODE>
+			<NODE ID=182 type="CtlRefConst" name="CAN离线数据">
+				<DESC></DESC>
+			</NODE>
+			<NODE ID=140 type="Property Node">
+				<DESC></DESC>
+			</NODE>
+			<NODE ID=182 type="CtlRefConst" name="进度数值">
+				<DESC></DESC>
+			</NODE>
+			<CONTROL ID=79 type="假常量" name="可见">
+				<DESC></DESC>
+				<TIP></TIP>
+				<PARTS>
+				</PARTS>
+			</CONTROL>
+			<NODE ID=140 type="Property Node">
+				<DESC></DESC>
+			</NODE>
+			<CONTROL ID=80 type="数值常量" name="值">
+				<DESC></DESC>
+				<TIP></TIP>
+				<PARTS>
+				</PARTS>
+			</CONTROL>
+			<NODE ID=140 type="Property Node">
+				<DESC></DESC>
+			</NODE>
+			<NODE ID=182 type="CtlRefConst" name="水平进度条">
+				<DESC></DESC>
+			</NODE>
+			<NODE ID=169 type="Invoke Node">
+				<DESC></DESC>
+			</NODE>
+			<CONTROL ID=79 type="假常量" name="可见">
+				<DESC></DESC>
+				<TIP></TIP>
+				<PARTS>
+				</PARTS>
+			</CONTROL>
+			<NODE ID=140 type="Property Node">
+				<DESC></DESC>
+			</NODE>
+			<NODE ID=182 type="CtlRefConst" name="绘图提示语">
+				<DESC></DESC>
+			</NODE>
+			<NODE ID=169 type="Invoke Node">
+				<DESC></DESC>
+			</NODE>
+			<NODE ID=140 type="Property Node">
+				<DESC></DESC>
+			</NODE>
+			<CONTROL ID=80 type="数值常量" name="图例:大小:宽度">
+				<DESC></DESC>
+				<TIP></TIP>
+				<PARTS>
+				</PARTS>
+			</CONTROL>
+			<NODE ID=182 type="CtlRefConst" name="图例与游标宽度">
+				<DESC></DESC>
+			</NODE>
+			<LABEL><STEXT>本帧为初始化</STEXT></LABEL>
+			<CONTROL ID=80 type="数值常量" name="已选数量">
+				<DESC></DESC>
+				<TIP></TIP>
+				<PARTS>
+				</PARTS>
+			</CONTROL>
+			<NODE ID=140 type="Property Node">
+				<DESC></DESC>
+			</NODE>
+			<NODE ID=182 type="CtlRefConst" name="已选数量">
+				<DESC></DESC>
+			</NODE>
+			<NODE ID=182 type="CtlRefConst" name="已选信号列表">
+				<DESC></DESC>
+			</NODE>
+			<CONTROL ID=82 type="数组常量" name="项名">
+				<DESC></DESC>
+				<TIP></TIP>
+				<PARTS>
+				</PARTS>
+				<DEFAULT>
+					<ARRAY nElems=0>
+					</ARRAY>
+				</DEFAULT>
+				<CONTENT>
+					<CONTROL ID=81 type="字符串常量" >
+						<DESC></DESC>
+						<TIP></TIP>
+						<PARTS>
+							<PART ID=11 order=0 type="文本"><LABEL><STEXT></STEXT></LABEL></PART>
+						</PARTS>
+						<DEFAULT><SAME_AS_LABEL></DEFAULT>
+					</CONTROL>
+				</CONTENT>
+			</CONTROL>
+			<NODE ID=140 type="Property Node">
+				<DESC></DESC>
+			</NODE>
+			<NODE ID=140 type="Property Node">
+				<DESC></DESC>
+			</NODE>
+			<NODE ID=182 type="CtlRefConst" name="DBC文件路径">
+				<DESC></DESC>
+			</NODE>
+			<NODE ID=182 type="CtlRefConst" name="加载dbc">
+				<DESC></DESC>
+			</NODE>
+			<NODE ID=47 type="Function" primID=2020454E primName="不等于？">
+				<DESC></DESC>
+			</NODE>
+			<DESC></DESC>
+			<TIP></TIP>
+			<PARTS>
+			</PARTS>
+			<NODE ID=44 type="Select">
+				<DESC></DESC>
+				<BDCONTENT>
+					<CONTROL ID=79 type="假常量" name="可见">
+						<DESC></DESC>
+						<TIP></TIP>
+						<PARTS>
+						</PARTS>
+					</CONTROL>
+					<NODE ID=140 type="Property Node">
+						<DESC></DESC>
+					</NODE>
+				</BDCONTENT>
+				<BDCONTENT>
+					<CONTROL ID=79 type="假常量" name="可见">
+						<DESC></DESC>
+						<TIP></TIP>
+						<PARTS>
+						</PARTS>
+					</CONTROL>
+					<NODE ID=140 type="Property Node">
+						<DESC></DESC>
+					</NODE>
+				</BDCONTENT>
+			</NODE>
+		</BDCONTENT>
+		<BDCONTENT>
+			<NODE ID=33 type="While Loop">
+				<DESC></DESC>
+				<BDCONTENT>
+					<NODE ID=213 type="Event Struct">
+						<DESC></DESC>
+						<BDCONTENT>
+						</BDCONTENT>
+						<BDCONTENT>
+							<CONTROL ID=79 type="假常量" >
+								<DESC></DESC>
+								<TIP></TIP>
+								<PARTS>
+								</PARTS>
+							</CONTROL>
+						</BDCONTENT>
+						<BDCONTENT>
+							<NODE ID=44 type="Select">
+								<DESC></DESC>
+								<BDCONTENT>
+									<NODE ID=49 type="SubVI" name="显示对话框信息3" subVIName="1">
+										<DESC></DESC>
+									</NODE>
+								</BDCONTENT>
+								<BDCONTENT>
+									<NODE ID=140 type="Property Node">
+										<DESC></DESC>
+									</NODE>
+									<NODE ID=182 type="CtlRefConst" name="值表数组">
+										<DESC></DESC>
+									</NODE>
+									<NODE ID=182 type="CtlRefConst" name="所有ValueTable">
+										<DESC></DESC>
+									</NODE>
+									<NODE ID=49 type="SubVI" subVIName="DBC2Sheet.vi">
+										<DESC></DESC>
+									</NODE>
+									<NODE ID=182 type="CtlRefConst" name="已选数量">
+										<DESC></DESC>
+									</NODE>
+									<CONTROL ID=80 type="数值常量" name="值">
+										<DESC></DESC>
+										<TIP></TIP>
+										<PARTS>
+										</PARTS>
+									</CONTROL>
+									<NODE ID=140 type="Property Node">
+										<DESC></DESC>
+									</NODE>
+									<NODE ID=182 type="CtlRefConst" name="已选信号列表">
+										<DESC></DESC>
+									</NODE>
+									<CONTROL ID=82 type="数组常量" name="项名">
+										<DESC></DESC>
+										<TIP></TIP>
+										<PARTS>
+										</PARTS>
+										<DEFAULT>
+											<ARRAY nElems=0>
+											</ARRAY>
+										</DEFAULT>
+										<CONTENT>
+											<CONTROL ID=81 type="字符串常量" >
+												<DESC></DESC>
+												<TIP></TIP>
+												<PARTS>
+													<PART ID=11 order=0 type="文本"><LABEL><STEXT></STEXT></LABEL></PART>
+												</PARTS>
+												<DEFAULT><SAME_AS_LABEL></DEFAULT>
+											</CONTROL>
+										</CONTENT>
+									</CONTROL>
+									<NODE ID=140 type="Property Node">
+										<DESC></DESC>
+									</NODE>
+									<NODE ID=140 type="Property Node">
+										<DESC></DESC>
+									</NODE>
+									<NODE ID=182 type="CtlRefConst" name="全部信号数组">
+										<DESC></DESC>
+									</NODE>
+									<NODE ID=140 type="Property Node">
+										<DESC></DESC>
+									</NODE>
+									<NODE ID=182 type="CtlRefConst" name="报文数">
+										<DESC></DESC>
+									</NODE>
+									<NODE ID=140 type="Property Node">
+										<DESC></DESC>
+									</NODE>
+									<NODE ID=182 type="CtlRefConst" name="信号数">
+										<DESC></DESC>
+									</NODE>
+								</BDCONTENT>
+							</NODE>
+							<NODE ID=49 type="SubVI" subVIName="Get File Extension.vi">
+								<DESC></DESC>
+							</NODE>
+							<NODE ID=140 type="Property Node">
+								<DESC></DESC>
+							</NODE>
+							<NODE ID=182 type="CtlRefConst" name="DBC文件路径">
+								<DESC></DESC>
+							</NODE>
+						</BDCONTENT>
+						<BDCONTENT>
+							<NODE ID=41 type="Sequence">
+								<DESC></DESC>
+								<BDCONTENT>
+									<NODE ID=140 type="Property Node">
+										<DESC></DESC>
+									</NODE>
+									<NODE ID=182 type="CtlRefConst" name="加载的CAN离线数据数组">
+										<DESC></DESC>
+									</NODE>
+									<NODE ID=140 type="Property Node">
+										<DESC></DESC>
+									</NODE>
+									<NODE ID=182 type="CtlRefConst" name="进度数值">
+										<DESC></DESC>
+									</NODE>
+									<CONTROL ID=79 type="假常量" name="可见">
+										<DESC></DESC>
+										<TIP></TIP>
+										<PARTS>
+										</PARTS>
+									</CONTROL>
+									<NODE ID=140 type="Property Node">
+										<DESC></DESC>
+									</NODE>
+									<NODE ID=182 type="CtlRefConst" name="水平进度条">
+										<DESC></DESC>
+									</NODE>
+									<NODE ID=182 type="CtlRefConst" name="绘图提示语">
+										<DESC></DESC>
+									</NODE>
+									<NODE ID=140 type="Property Node">
+										<DESC></DESC>
+									</NODE>
+									<NODE ID=140 type="Property Node">
+										<DESC></DESC>
+									</NODE>
+									<NODE ID=182 type="CtlRefConst" name="CAN离线数据">
+										<DESC></DESC>
+									</NODE>
+									<NODE ID=49 type="SubVI" subVIName="CANpro150txtOpen.vi">
+										<DESC></DESC>
+									</NODE>
+								</BDCONTENT>
+								<BDCONTENT>
+									<NODE ID=182 type="CtlRefConst" name="离线数据已加载">
+										<DESC></DESC>
+									</NODE>
+									<CONTROL ID=79 type="假常量" name="值">
+										<DESC></DESC>
+										<TIP></TIP>
+										<PARTS>
+										</PARTS>
+									</CONTROL>
+									<NODE ID=140 type="Property Node">
+										<DESC></DESC>
+									</NODE>
+									<NODE ID=182 type="CtlRefConst" name="绘图">
+										<DESC></DESC>
+									</NODE>
+									<CONTROL ID=87 type="Enum" name="禁用">
+										<DESC></DESC>
+										<TIP></TIP>
+										<PARTS>
+											<PART ID=12 order=0 type="下拉列表文本"><MLABEL><STRINGS></STRINGS></MLABEL></PART>
+										</PARTS>
+									</CONTROL>
+									<NODE ID=140 type="Property Node">
+										<DESC></DESC>
+									</NODE>
+									<NODE ID=140 type="Property Node">
+										<DESC></DESC>
+									</NODE>
+									<NODE ID=182 type="CtlRefConst" name="进度数值">
+										<DESC></DESC>
+									</NODE>
+									<NODE ID=140 type="Property Node">
+										<DESC></DESC>
+									</NODE>
+									<NODE ID=182 type="CtlRefConst" name="水平进度条">
+										<DESC></DESC>
+									</NODE>
+									<NODE ID=182 type="CtlRefConst" name="绘图提示语">
+										<DESC></DESC>
+									</NODE>
+									<CONTROL ID=79 type="假常量" name="可见">
+										<DESC></DESC>
+										<TIP></TIP>
+										<PARTS>
+										</PARTS>
+									</CONTROL>
+									<NODE ID=140 type="Property Node">
+										<DESC></DESC>
+									</NODE>
+								</BDCONTENT>
+							</NODE>
+						</BDCONTENT>
+						<BDCONTENT>
+							<NODE ID=140 type="Property Node">
+								<DESC></DESC>
+							</NODE>
+							<NODE ID=44 type="Select">
+								<DESC></DESC>
+								<BDCONTENT>
+								</BDCONTENT>
+								<BDCONTENT>
+									<NODE ID=44 type="Select">
+										<DESC></DESC>
+										<BDCONTENT>
+										</BDCONTENT>
+										<BDCONTENT>
+											<NODE ID=47 type="Function" primID=2020544C primName="小于？">
+												<DESC></DESC>
+											</NODE>
+											<NODE ID=140 type="Property Node">
+												<DESC></DESC>
+											</NODE>
+											<NODE ID=182 type="CtlRefConst" name="已选数量">
+												<DESC></DESC>
+											</NODE>
+											<NODE ID=44 type="Select">
+												<DESC></DESC>
+												<BDCONTENT>
+													<NODE ID=49 type="SubVI" subVIName="2">
+														<DESC></DESC>
+													</NODE>
+												</BDCONTENT>
+												<BDCONTENT>
+													<NODE ID=41 type="Sequence">
+														<DESC></DESC>
+														<BDCONTENT>
+															<LABEL><STEXT>添加到已选的列表</STEXT></LABEL>
+															<NODE ID=68 type="Index Array">
+																<DESC></DESC>
+															</NODE>
+															<NODE ID=68 type="Index Array">
+																<DESC></DESC>
+															</NODE>
+															<NODE ID=47 type="Function" primID=58485253 primName="搜索一维数组">
+																<DESC></DESC>
+															</NODE>
+															<CONTROL ID=80 type="数值常量" name="禁用的索引 (列)">
+																<DESC></DESC>
+																<TIP></TIP>
+																<PARTS>
+																</PARTS>
+															</CONTROL>
+															<NODE ID=68 type="Index Array">
+																<DESC></DESC>
+															</NODE>
+															<CONTROL ID=80 type="数值常量" name="索引 (列)">
+																<DESC></DESC>
+																<TIP></TIP>
+																<PARTS>
+																</PARTS>
+															</CONTROL>
+															<NODE ID=187 type="Insert Into Array">
+																<DESC></DESC>
+															</NODE>
+															<NODE ID=140 type="Property Node">
+																<DESC></DESC>
+															</NODE>
+															<NODE ID=58 type="Build Array">
+																<DESC></DESC>
+															</NODE>
+															<CONTROL ID=80 type="数值常量" name="索引 (列)">
+																<DESC></DESC>
+																<TIP></TIP>
+																<PARTS>
+																</PARTS>
+															</CONTROL>
+															<CONTROL ID=80 type="数值常量" name="禁用的索引 (列)">
+																<DESC></DESC>
+																<TIP></TIP>
+																<PARTS>
+																</PARTS>
+															</CONTROL>
+														</BDCONTENT>
+														<BDCONTENT>
+															<LABEL><STEXT>计数</STEXT></LABEL>
+															<NODE ID=140 type="Property Node">
+																<DESC></DESC>
+															</NODE>
+															<NODE ID=47 type="Function" primID=20434E49 primName="加1">
+																<DESC></DESC>
+															</NODE>
+														</BDCONTENT>
+													</NODE>
+												</BDCONTENT>
+											</NODE>
+										</BDCONTENT>
+									</NODE>
+									<NODE ID=47 type="Function" primID=58485253 primName="搜索一维数组">
+										<DESC></DESC>
+									</NODE>
+									<CONTROL ID=80 type="数值常量" name="禁用的索引 (列)">
+										<DESC></DESC>
+										<TIP></TIP>
+										<PARTS>
+										</PARTS>
+									</CONTROL>
+									<NODE ID=68 type="Index Array">
+										<DESC></DESC>
+									</NODE>
+									<NODE ID=140 type="Property Node">
+										<DESC></DESC>
+									</NODE>
+								</BDCONTENT>
+							</NODE>
+							<NODE ID=47 type="Function" primID=455A4953 primName="数组大小">
+								<DESC></DESC>
+							</NODE>
+							<NODE ID=169 type="Invoke Node">
+								<DESC></DESC>
+							</NODE>
+							<LABEL><STEXT>0-SignalTag<LF>
+1-Signal<LF>
+2-报文+ID<LF>
+3-ID（不带0x的16进制）<LF>
+4-起始位<LF>
+5-长度<LF>
+6-格式<LF>
+7-缩放系数<LF>
+8-偏移量<LF>
+9-最小值<LF>
+10-最大值<LF>
+11-单位<LF>
+12-节点</STEXT></LABEL>
+						</BDCONTENT>
+						<BDCONTENT>
+							<NODE ID=47 type="Function" primID=20305447 primName="大于0？">
+								<DESC></DESC>
+							</NODE>
+							<NODE ID=44 type="Select">
+								<DESC></DESC>
+								<BDCONTENT>
+								</BDCONTENT>
+								<BDCONTENT>
+									<NODE ID=47 type="Function" primID=20434544 primName="减1">
+										<DESC></DESC>
+									</NODE>
+									<NODE ID=140 type="Property Node">
+										<DESC></DESC>
+									</NODE>
+								</BDCONTENT>
+							</NODE>
+							<NODE ID=182 type="CtlRefConst" name="已选数量">
+								<DESC></DESC>
+							</NODE>
+							<NODE ID=140 type="Property Node">
+								<DESC></DESC>
+							</NODE>
+							<NODE ID=140 type="Property Node">
+								<DESC></DESC>
+							</NODE>
+							<NODE ID=189 type="Delete From Array">
+								<DESC></DESC>
+							</NODE>
+							<NODE ID=140 type="Property Node">
+								<DESC></DESC>
+							</NODE>
+							<NODE ID=140 type="Property Node">
+								<DESC></DESC>
+							</NODE>
+							<NODE ID=189 type="Delete From Array">
+								<DESC></DESC>
+							</NODE>
+							<NODE ID=140 type="Property Node">
+								<DESC></DESC>
+							</NODE>
+							<NODE ID=182 type="CtlRefConst" name="已选信号列表">
+								<DESC></DESC>
+							</NODE>
+							<NODE ID=182 type="CtlRefConst" name="已选信号数组">
+								<DESC></DESC>
+							</NODE>
+						</BDCONTENT>
+						<BDCONTENT>
+							<CONTROL ID=80 type="数值常量" name="值">
+								<DESC></DESC>
+								<TIP></TIP>
+								<PARTS>
+								</PARTS>
+							</CONTROL>
+							<NODE ID=182 type="CtlRefConst" name="已选数量">
+								<DESC></DESC>
+							</NODE>
+							<NODE ID=140 type="Property Node">
+								<DESC></DESC>
+							</NODE>
+							<CONTROL ID=82 type="数组常量" name="值">
+								<DESC></DESC>
+								<TIP></TIP>
+								<PARTS>
+								</PARTS>
+								<DEFAULT>
+									<ARRAY nElems=0>
+									</ARRAY>
+								</DEFAULT>
+								<CONTENT>
+									<CONTROL ID=81 type="字符串常量" name="String">
+										<DESC></DESC>
+										<TIP></TIP>
+										<PARTS>
+											<PART ID=11 order=0 type="文本"><LABEL><STEXT></STEXT></LABEL></PART>
+										</PARTS>
+										<DEFAULT><SAME_AS_LABEL></DEFAULT>
+									</CONTROL>
+								</CONTENT>
+							</CONTROL>
+							<NODE ID=140 type="Property Node">
+								<DESC></DESC>
+							</NODE>
+							<NODE ID=182 type="CtlRefConst" name="已选信号数组">
+								<DESC></DESC>
+							</NODE>
+							<CONTROL ID=82 type="数组常量" name="项名">
+								<DESC></DESC>
+								<TIP></TIP>
+								<PARTS>
+								</PARTS>
+								<DEFAULT>
+									<ARRAY nElems=0>
+									</ARRAY>
+								</DEFAULT>
+								<CONTENT>
+									<CONTROL ID=81 type="字符串常量" >
+										<DESC></DESC>
+										<TIP></TIP>
+										<PARTS>
+											<PART ID=11 order=0 type="文本"><LABEL><STEXT></STEXT></LABEL></PART>
+										</PARTS>
+										<DEFAULT><SAME_AS_LABEL></DEFAULT>
+									</CONTROL>
+								</CONTENT>
+							</CONTROL>
+							<NODE ID=140 type="Property Node">
+								<DESC></DESC>
+							</NODE>
+						</BDCONTENT>
+						<BDCONTENT>
+							<NODE ID=47 type="Function" primID=20305447 primName="大于0？">
+								<DESC></DESC>
+							</NODE>
+							<NODE ID=44 type="Select">
+								<DESC></DESC>
+								<BDCONTENT>
+									<NODE ID=49 type="SubVI" name="显示对话框信息" subVIName="0">
+										<DESC></DESC>
+									</NODE>
+								</BDCONTENT>
+								<BDCONTENT>
+								</BDCONTENT>
+							</NODE>
+							<NODE ID=47 type="Function" primID=455A4953 primName="数组大小">
+								<DESC></DESC>
+							</NODE>
+							<CONTROL ID=80 type="数值常量" name="禁用的索引 (列)">
+								<DESC></DESC>
+								<TIP></TIP>
+								<PARTS>
+								</PARTS>
+							</CONTROL>
+							<NODE ID=68 type="Index Array">
+								<DESC></DESC>
+							</NODE>
+							<NODE ID=140 type="Property Node">
+								<DESC></DESC>
+							</NODE>
+						</BDCONTENT>
+						<BDCONTENT>
+							<NODE ID=140 type="Property Node">
+								<DESC></DESC>
+							</NODE>
+							<NODE ID=182 type="CtlRefConst" name="离线数据已加载">
+								<DESC></DESC>
+							</NODE>
+							<NODE ID=44 type="Select">
+								<DESC></DESC>
+								<BDCONTENT>
+									<NODE ID=49 type="SubVI" name="显示对话框信息4" subVIName="3">
+										<DESC></DESC>
+									</NODE>
+								</BDCONTENT>
+								<BDCONTENT>
+									<NODE ID=140 type="Property Node">
+										<DESC></DESC>
+									</NODE>
+									<NODE ID=41 type="Sequence">
+										<DESC></DESC>
+										<BDCONTENT>
+											<LABEL><STEXT>0-SignalTag<LF>
+1-Signal<LF>
+2-报文+ID<LF>
+3-ID（不带0x的16进制）<LF>
+4-起始位<LF>
+5-长度<LF>
+6-格式<LF>
+7-缩放系数<LF>
+8-偏移量<LF>
+9-最小值<LF>
+10-最大值<LF>
+11-单位<LF>
+12-节点</STEXT></LABEL>
+											<CONTROL ID=81 type="字符串常量" name="值">
+												<DESC></DESC>
+												<TIP></TIP>
+												<PARTS>
+													<PART ID=11 order=0 type="文本"><LABEL><STEXT></STEXT></LABEL></PART>
+												</PARTS>
+												<DEFAULT><STRING>开始绘图...</STRING></DEFAULT>
+											</CONTROL>
+											<NODE ID=140 type="Property Node">
+												<DESC></DESC>
+											</NODE>
+											<CONTROL ID=79 type="假常量" name="可见">
+												<DESC></DESC>
+												<TIP></TIP>
+												<PARTS>
+												</PARTS>
+											</CONTROL>
+											<NODE ID=182 type="CtlRefConst" name="绘图提示语">
+												<DESC></DESC>
+											</NODE>
+											<NODE ID=140 type="Property Node">
+												<DESC></DESC>
+											</NODE>
+											<NODE ID=140 type="Property Node">
+												<DESC></DESC>
+											</NODE>
+											<NODE ID=182 type="CtlRefConst" name="图例与游标宽度">
+												<DESC></DESC>
+											</NODE>
+											<NODE ID=140 type="Property Node">
+												<DESC></DESC>
+											</NODE>
+											<CONTROL ID=82 type="数组常量" >
+												<DESC></DESC>
+												<TIP></TIP>
+												<PARTS>
+												</PARTS>
+												<DEFAULT>
+													<ARRAY nElems=0>
+													</ARRAY>
+												</DEFAULT>
+												<CONTENT>
+													<CONTROL ID=81 type="字符串常量" name="String">
+														<DESC></DESC>
+														<TIP></TIP>
+														<PARTS>
+															<PART ID=11 order=0 type="文本"><LABEL><STEXT></STEXT></LABEL></PART>
+														</PARTS>
+														<DEFAULT><SAME_AS_LABEL></DEFAULT>
+													</CONTROL>
+												</CONTENT>
+											</CONTROL>
+											<NODE ID=32 type="For Loop">
+												<DESC></DESC>
+												<BDCONTENT>
+													<NODE ID=68 type="Index Array">
+														<DESC></DESC>
+													</NODE>
+													<CONTROL ID=80 type="数值常量" name="禁用的索引 (列)">
+														<DESC></DESC>
+														<TIP></TIP>
+														<PARTS>
+														</PARTS>
+													</CONTROL>
+													<NODE ID=68 type="Index Array">
+														<DESC></DESC>
+													</NODE>
+													<NODE ID=47 type="Function" primID=58485253 primName="搜索一维数组">
+														<DESC></DESC>
+													</NODE>
+													<NODE ID=58 type="Build Array">
+														<DESC></DESC>
+													</NODE>
+												</BDCONTENT>
+											</NODE>
+											<CONTROL ID=80 type="数值常量" name="禁用的索引 (列)">
+												<DESC></DESC>
+												<TIP></TIP>
+												<PARTS>
+												</PARTS>
+											</CONTROL>
+											<NODE ID=68 type="Index Array">
+												<DESC></DESC>
+											</NODE>
+											<NODE ID=140 type="Property Node">
+												<DESC></DESC>
+											</NODE>
+											<CONTROL ID=79 type="假常量" name="图例:自动调整大小">
+												<DESC></DESC>
+												<TIP></TIP>
+												<PARTS>
+												</PARTS>
+											</CONTROL>
+											<NODE ID=140 type="Property Node">
+												<DESC></DESC>
+											</NODE>
+											<NODE ID=169 type="Invoke Node">
+												<DESC></DESC>
+											</NODE>
+										</BDCONTENT>
+										<BDCONTENT>
+											<NODE ID=182 type="CtlRefConst" name="绘图提示语">
+												<DESC></DESC>
+											</NODE>
+											<CONTROL ID=81 type="字符串常量" name="值">
+												<DESC></DESC>
+												<TIP></TIP>
+												<PARTS>
+													<PART ID=11 order=0 type="文本"><LABEL><STEXT></STEXT></LABEL></PART>
+												</PARTS>
+												<DEFAULT><STRING>配置坐标轴</STRING></DEFAULT>
+											</CONTROL>
+											<NODE ID=140 type="Property Node">
+												<DESC></DESC>
+											</NODE>
+											<CONTROL ID=80 type="数值常量" name="索引 (列)">
+												<DESC></DESC>
+												<TIP></TIP>
+												<PARTS>
+												</PARTS>
+											</CONTROL>
+											<NODE ID=47 type="Function" primID=20204547 primName="大于等于？">
+												<DESC></DESC>
+											</NODE>
+											<NODE ID=47 type="Function" primID=455A4953 primName="数组大小">
+												<DESC></DESC>
+											</NODE>
+											<CONTROL ID=80 type="数值常量" name="禁用的索引 (列)">
+												<DESC></DESC>
+												<TIP></TIP>
+												<PARTS>
+												</PARTS>
+											</CONTROL>
+											<NODE ID=68 type="Index Array">
+												<DESC></DESC>
+											</NODE>
+											<NODE ID=140 type="Property Node">
+												<DESC></DESC>
+											</NODE>
+											<NODE ID=44 type="Select">
+												<DESC></DESC>
+												<BDCONTENT>
+													<NODE ID=32 type="For Loop">
+														<DESC></DESC>
+														<BDCONTENT>
+															<NODE ID=68 type="Index Array">
+																<DESC></DESC>
+															</NODE>
+															<NODE ID=68 type="Index Array">
+																<DESC></DESC>
+															</NODE>
+															<NODE ID=44 type="Select">
+																<DESC></DESC>
+																<BDCONTENT>
+																	<NODE ID=140 type="Property Node">
+																		<DESC></DESC>
+																	</NODE>
+																	<CONTROL ID=81 type="字符串常量" name="字符串">
+																		<DESC></DESC>
+																		<TIP></TIP>
+																		<PARTS>
+																			<PART ID=11 order=0 type="文本"><LABEL><STEXT></STEXT></LABEL></PART>
+																		</PARTS>
+																		<DEFAULT><STRING>+</STRING></DEFAULT>
+																	</CONTROL>
+																	<CONTROL ID=81 type="字符串常量" name="字符串">
+																		<DESC></DESC>
+																		<TIP></TIP>
+																		<PARTS>
+																			<PART ID=11 order=0 type="文本"><LABEL><STEXT></STEXT></LABEL></PART>
+																		</PARTS>
+																		<DEFAULT><STRING>/</STRING></DEFAULT>
+																	</CONTROL>
+																	<NODE ID=62 type="Concatenate Strings">
+																		<DESC></DESC>
+																	</NODE>
+																	<NODE ID=47 type="Function" primID=4D455251 primName="商与余数">
+																		<DESC></DESC>
+																	</NODE>
+																	<NODE ID=140 type="Property Node">
+																		<DESC></DESC>
+																	</NODE>
+																	<NODE ID=140 type="Property Node">
+																		<DESC></DESC>
+																	</NODE>
+																</BDCONTENT>
+																<BDCONTENT>
+																	<NODE ID=140 type="Property Node">
+																		<DESC></DESC>
+																	</NODE>
+																	<CONTROL ID=81 type="字符串常量" name="字符串">
+																		<DESC></DESC>
+																		<TIP></TIP>
+																		<PARTS>
+																			<PART ID=11 order=0 type="文本"><LABEL><STEXT></STEXT></LABEL></PART>
+																		</PARTS>
+																		<DEFAULT><STRING>/</STRING></DEFAULT>
+																	</CONTROL>
+																	<NODE ID=62 type="Concatenate Strings">
+																		<DESC></DESC>
+																	</NODE>
+																	<NODE ID=140 type="Property Node">
+																		<DESC></DESC>
+																	</NODE>
+																</BDCONTENT>
+															</NODE>
+															<NODE ID=47 type="Function" primID=20205447 primName="大于？">
+																<DESC></DESC>
+															</NODE>
+														</BDCONTENT>
+													</NODE>
+												</BDCONTENT>
+												<BDCONTENT>
+													<NODE ID=32 type="For Loop">
+														<DESC></DESC>
+														<BDCONTENT>
+															<NODE ID=68 type="Index Array">
+																<DESC></DESC>
+															</NODE>
+															<NODE ID=68 type="Index Array">
+																<DESC></DESC>
+															</NODE>
+															<NODE ID=44 type="Select">
+																<DESC></DESC>
+																<BDCONTENT>
+																	<CONTROL ID=81 type="字符串常量" name="曲线.曲线名">
+																		<DESC></DESC>
+																		<TIP></TIP>
+																		<PARTS>
+																			<PART ID=11 order=0 type="文本"><LABEL><STEXT></STEXT></LABEL></PART>
+																		</PARTS>
+																		<DEFAULT><STRING>无</STRING></DEFAULT>
+																	</CONTROL>
+																	<NODE ID=140 type="Property Node">
+																		<DESC></DESC>
+																	</NODE>
+																	<NODE ID=140 type="Property Node">
+																		<DESC></DESC>
+																	</NODE>
+																</BDCONTENT>
+																<BDCONTENT>
+																	<NODE ID=140 type="Property Node">
+																		<DESC></DESC>
+																	</NODE>
+																	<CONTROL ID=81 type="字符串常量" name="字符串">
+																		<DESC></DESC>
+																		<TIP></TIP>
+																		<PARTS>
+																			<PART ID=11 order=0 type="文本"><LABEL><STEXT></STEXT></LABEL></PART>
+																		</PARTS>
+																		<DEFAULT><STRING>/</STRING></DEFAULT>
+																	</CONTROL>
+																	<NODE ID=62 type="Concatenate Strings">
+																		<DESC></DESC>
+																	</NODE>
+																	<NODE ID=140 type="Property Node">
+																		<DESC></DESC>
+																	</NODE>
+																</BDCONTENT>
+															</NODE>
+															<NODE ID=47 type="Function" primID=20205447 primName="大于？">
+																<DESC></DESC>
+															</NODE>
+														</BDCONTENT>
+													</NODE>
+												</BDCONTENT>
+											</NODE>
+											<LABEL><STEXT>所有纵坐标配置</STEXT></LABEL>
+										</BDCONTENT>
+										<BDCONTENT>
+											<NODE ID=140 type="Property Node">
+												<DESC></DESC>
+											</NODE>
+											<NODE ID=182 type="CtlRefConst" name="加载的CAN离线数据数组">
+												<DESC></DESC>
+											</NODE>
+											<NODE ID=182 type="CtlRefConst" name="绘图提示语">
+												<DESC></DESC>
+											</NODE>
+											<CONTROL ID=81 type="字符串常量" name="值">
+												<DESC></DESC>
+												<TIP></TIP>
+												<PARTS>
+													<PART ID=11 order=0 type="文本"><LABEL><STEXT></STEXT></LABEL></PART>
+												</PARTS>
+												<DEFAULT><STRING>绘制曲线...</STRING></DEFAULT>
+											</CONTROL>
+											<NODE ID=140 type="Property Node">
+												<DESC></DESC>
+											</NODE>
+											<NODE ID=140 type="Property Node">
+												<DESC></DESC>
+											</NODE>
+											<CONTROL ID=82 type="数组常量" >
+												<DESC></DESC>
+												<TIP></TIP>
+												<PARTS>
+												</PARTS>
+												<CONTENT>
+													<CONTROL ID=83 type="簇常量" name="信号">
+														<DESC></DESC>
+														<TIP></TIP>
+														<PARTS>
+														</PARTS>
+														<CONTENT>
+															<GROUPER>
+																<PARTS>
+																</PARTS></GROUPER>
+															<CONTROL ID=82 type="数组常量" name="数据">
+																<DESC></DESC>
+																<TIP></TIP>
+																<PARTS>
+																</PARTS>
+																<CONTENT>
+																	<CONTROL ID=80 type="数值常量" >
+																		<DESC></DESC>
+																		<TIP></TIP>
+																		<PARTS>
+																		</PARTS>
+																	</CONTROL>
+																</CONTENT>
+															</CONTROL>
+															<CONTROL ID=82 type="数组常量" name="时间(s)">
+																<DESC></DESC>
+																<TIP></TIP>
+																<PARTS>
+																</PARTS>
+																<CONTENT>
+																	<CONTROL ID=80 type="数值常量" >
+																		<DESC></DESC>
+																		<TIP></TIP>
+																		<PARTS>
+																		</PARTS>
+																	</CONTROL>
+																</CONTENT>
+															</CONTROL>
+														</CONTENT>
+													</CONTROL>
+												</CONTENT>
+											</CONTROL>
+											<NODE ID=32 type="For Loop">
+												<DESC></DESC>
+												<BDCONTENT>
+													<NODE ID=47 type="Function" primID=23474645 primName="分数/指数字符串至数值转换">
+														<DESC></DESC>
+													</NODE>
+													<NODE ID=47 type="Function" primID=23474645 primName="分数/指数字符串至数值转换">
+														<DESC></DESC>
+													</NODE>
+													<NODE ID=58 type="Build Array">
+														<DESC></DESC>
+													</NODE>
+													<NODE ID=52 type="Bundle">
+														<DESC></DESC>
+													</NODE>
+													<NODE ID=47 type="Function" primID=20234425 primName="十进制数字符串至数值转换">
+														<DESC></DESC>
+													</NODE>
+													<CONTROL ID=80 type="数值常量" name="默认(0 I32)">
+														<DESC></DESC>
+														<TIP></TIP>
+														<PARTS>
+														</PARTS>
+													</CONTROL>
+													<NODE ID=47 type="Function" primID=20234425 primName="十进制数字符串至数值转换">
+														<DESC></DESC>
+													</NODE>
+													<CONTROL ID=80 type="数值常量" name="索引">
+														<DESC></DESC>
+														<TIP></TIP>
+														<PARTS>
+														</PARTS>
+													</CONTROL>
+													<CONTROL ID=80 type="数值常量" name="索引">
+														<DESC></DESC>
+														<TIP></TIP>
+														<PARTS>
+														</PARTS>
+													</CONTROL>
+													<CONTROL ID=80 type="数值常量" name="索引">
+														<DESC></DESC>
+														<TIP></TIP>
+														<PARTS>
+														</PARTS>
+													</CONTROL>
+													<CONTROL ID=80 type="数值常量" name="索引">
+														<DESC></DESC>
+														<TIP></TIP>
+														<PARTS>
+														</PARTS>
+													</CONTROL>
+													<CONTROL ID=80 type="数值常量" name="索引">
+														<DESC></DESC>
+														<TIP></TIP>
+														<PARTS>
+														</PARTS>
+													</CONTROL>
+													<NODE ID=44 type="Select">
+														<DESC></DESC>
+														<BDCONTENT>
+															<NODE ID=49 type="SubVI" subVIName="MotoSignalSet.vi">
+																<DESC></DESC>
+															</NODE>
+														</BDCONTENT>
+														<BDCONTENT>
+															<NODE ID=49 type="SubVI" subVIName="IntelSignalSet.vi">
+																<DESC></DESC>
+															</NODE>
+														</BDCONTENT>
+													</NODE>
+													<CONTROL ID=80 type="数值常量" name="索引">
+														<DESC></DESC>
+														<TIP></TIP>
+														<PARTS>
+														</PARTS>
+													</CONTROL>
+													<NODE ID=68 type="Index Array">
+														<DESC></DESC>
+													</NODE>
+													<NODE ID=49 type="SubVI" name="CANArry2Bits.vi" subVIName="CANArry2Bits.vi">
+														<DESC></DESC>
+													</NODE>
+												</BDCONTENT>
+											</NODE>
+										</BDCONTENT>
+										<BDCONTENT>
+											<CONTROL ID=81 type="字符串常量" name="值">
+												<DESC></DESC>
+												<TIP></TIP>
+												<PARTS>
+													<PART ID=11 order=0 type="文本"><LABEL><STEXT></STEXT></LABEL></PART>
+												</PARTS>
+												<DEFAULT><STRING>大功告成</STRING></DEFAULT>
+											</CONTROL>
+											<NODE ID=140 type="Property Node">
+												<DESC></DESC>
+											</NODE>
+											<NODE ID=182 type="CtlRefConst" name="绘图提示语">
+												<DESC></DESC>
+											</NODE>
+											<NODE ID=140 type="Property Node">
+												<DESC></DESC>
+											</NODE>
+										</BDCONTENT>
+										<BDCONTENT>
+											<LABEL><STEXT>读取右侧Y轴的位置和宽度</STEXT></LABEL>
+											<CONTROL ID=82 type="数组常量" >
+												<DESC></DESC>
+												<TIP></TIP>
+												<PARTS>
+												</PARTS>
+												<CONTENT>
+													<CONTROL ID=80 type="数值常量" name="YScale.Width">
+														<DESC></DESC>
+														<TIP></TIP>
+														<PARTS>
+														</PARTS>
+													</CONTROL>
+												</CONTENT>
+											</CONTROL>
+											<CONTROL ID=80 type="数值常量" >
+												<DESC></DESC>
+												<TIP></TIP>
+												<PARTS>
+												</PARTS>
+											</CONTROL>
+											<NODE ID=32 type="For Loop">
+												<DESC></DESC>
+												<BDCONTENT>
+													<CONTROL ID=80 type="数值常量" name="y">
+														<DESC></DESC>
+														<TIP></TIP>
+														<PARTS>
+														</PARTS>
+													</CONTROL>
+													<NODE ID=47 type="Function" primID=4D455251 primName="商与余数">
+														<DESC></DESC>
+													</NODE>
+													<NODE ID=44 type="Select">
+														<DESC></DESC>
+														<BDCONTENT>
+														</BDCONTENT>
+														<BDCONTENT>
+															<NODE ID=44 type="Select">
+																<DESC></DESC>
+																<BDCONTENT>
+																</BDCONTENT>
+																<BDCONTENT>
+																	<NODE ID=58 type="Build Array">
+																		<DESC></DESC>
+																	</NODE>
+																	<NODE ID=58 type="Build Array">
+																		<DESC></DESC>
+																	</NODE>
+																</BDCONTENT>
+															</NODE>
+															<NODE ID=47 type="Function" primID=20434E49 primName="加1">
+																<DESC></DESC>
+															</NODE>
+														</BDCONTENT>
+													</NODE>
+													<NODE ID=140 type="Property Node">
+														<DESC></DESC>
+													</NODE>
+												</BDCONTENT>
+											</NODE>
+											<WIRE>
+												<PART ID=16 order=0 type="名称标签"><LABEL><STEXT>显示的Y轴数</STEXT></LABEL></PART>
+											</WIRE>
+										</BDCONTENT>
+										<BDCONTENT>
+											<LABEL><STEXT>调整右侧Y轴位置</STEXT></LABEL>
+											<CONTROL ID=80 type="数值常量" name="y">
+												<DESC></DESC>
+												<TIP></TIP>
+												<PARTS>
+												</PARTS>
+											</CONTROL>
+											<NODE ID=47 type="Function" primID=20205447 primName="大于？">
+												<DESC></DESC>
+											</NODE>
+											<NODE ID=44 type="Select">
+												<DESC></DESC>
+												<BDCONTENT>
+												</BDCONTENT>
+												<BDCONTENT>
+													<NODE ID=47 type="Function" primID=20444441 primName="加">
+														<DESC></DESC>
+													</NODE>
+													<NODE ID=32 type="For Loop">
+														<DESC></DESC>
+														<BDCONTENT>
+															<NODE ID=47 type="Function" primID=20444441 primName="加">
+																<DESC></DESC>
+															</NODE>
+															<CONTROL ID=80 type="数值常量" name="索引">
+																<DESC></DESC>
+																<TIP></TIP>
+																<PARTS>
+																</PARTS>
+															</CONTROL>
+															<CONTROL ID=80 type="数值常量" name="索引">
+																<DESC></DESC>
+																<TIP></TIP>
+																<PARTS>
+																</PARTS>
+															</CONTROL>
+															<NODE ID=68 type="Index Array">
+																<DESC></DESC>
+															</NODE>
+															<NODE ID=140 type="Property Node">
+																<DESC></DESC>
+															</NODE>
+														</BDCONTENT>
+													</NODE>
+													<CONTROL ID=80 type="数值常量" name="索引">
+														<DESC></DESC>
+														<TIP></TIP>
+														<PARTS>
+														</PARTS>
+													</CONTROL>
+													<CONTROL ID=80 type="数值常量" name="索引">
+														<DESC></DESC>
+														<TIP></TIP>
+														<PARTS>
+														</PARTS>
+													</CONTROL>
+													<NODE ID=68 type="Index Array">
+														<DESC></DESC>
+													</NODE>
+													<CONTROL ID=80 type="数值常量" name="长度">
+														<DESC></DESC>
+														<TIP></TIP>
+														<PARTS>
+														</PARTS>
+													</CONTROL>
+													<NODE ID=189 type="Delete From Array">
+														<DESC></DESC>
+													</NODE>
+												</BDCONTENT>
+											</NODE>
+											<NODE ID=47 type="Function" primID=455A4953 primName="数组大小">
+												<DESC></DESC>
+											</NODE>
+											<CONTROL ID=80 type="数值常量" name="禁用的索引 (列)">
+												<DESC></DESC>
+												<TIP></TIP>
+												<PARTS>
+												</PARTS>
+											</CONTROL>
+											<NODE ID=68 type="Index Array">
+												<DESC></DESC>
+											</NODE>
+										</BDCONTENT>
+										<BDCONTENT>
+											<CONTROL ID=81 type="字符串常量" name="值">
+												<DESC></DESC>
+												<TIP></TIP>
+												<PARTS>
+													<PART ID=11 order=0 type="文本"><LABEL><STEXT></STEXT></LABEL></PART>
+												</PARTS>
+												<DEFAULT><SAME_AS_LABEL></DEFAULT>
+											</CONTROL>
+											<NODE ID=140 type="Property Node">
+												<DESC></DESC>
+											</NODE>
+											<NODE ID=182 type="CtlRefConst" name="绘图提示语">
+												<DESC></DESC>
+											</NODE>
+											<CONTROL ID=79 type="假常量" name="可见">
+												<DESC></DESC>
+												<TIP></TIP>
+												<PARTS>
+												</PARTS>
+											</CONTROL>
+											<NODE ID=140 type="Property Node">
+												<DESC></DESC>
+											</NODE>
+										</BDCONTENT>
+									</NODE>
+									<NODE ID=182 type="CtlRefConst" name="已选信号数组">
+										<DESC></DESC>
+									</NODE>
+								</BDCONTENT>
+							</NODE>
+						</BDCONTENT>
+						<BDCONTENT>
+							<NODE ID=182 type="CtlRefConst" name="值表数组">
+								<DESC></DESC>
+							</NODE>
+							<NODE ID=140 type="Property Node">
+								<DESC></DESC>
+							</NODE>
+							<NODE ID=49 type="SubVI" subVIName="ListAllValue.vi">
+								<DESC></DESC>
+							</NODE>
+						</BDCONTENT>
+						<BDCONTENT>
+							<NODE ID=140 type="Property Node">
+								<DESC></DESC>
+							</NODE>
+							<NODE ID=140 type="Property Node">
+								<DESC></DESC>
+							</NODE>
+							<NODE ID=49 type="SubVI" name="ListSelectedValue.vi" subVIName="ListSelectedValue.vi">
+								<DESC></DESC>
+							</NODE>
+							<LABEL><STEXT>0-SignalTag<LF>
+1-Signal<LF>
+2-数值<LF>
+3-含义</STEXT></LABEL>
+							<NODE ID=182 type="CtlRefConst" name="值表数组">
+								<DESC></DESC>
+							</NODE>
+						</BDCONTENT>
+						<BDCONTENT>
+							<NODE ID=169 type="Invoke Node">
+								<DESC></DESC>
+							</NODE>
+						</BDCONTENT>
+						<BDCONTENT>
+							<NODE ID=47 type="Function" primID=20323355 primName="转换为无符号长整型">
+								<DESC></DESC>
+							</NODE>
+							<NODE ID=47 type="Function" primID=20444E52 primName="最近数取整">
+								<DESC></DESC>
+							</NODE>
+							<NODE ID=47 type="Function" primID=204C554D primName="乘">
+								<DESC></DESC>
+							</NODE>
+							<NODE ID=140 type="Property Node">
+								<DESC></DESC>
+							</NODE>
+							<NODE ID=47 type="Function" primID=20564944 primName="除">
+								<DESC></DESC>
+							</NODE>
+							<NODE ID=47 type="Function" primID=20425553 primName="减">
+								<DESC></DESC>
+							</NODE>
+							<NODE ID=47 type="Function" primID=20425553 primName="减">
+								<DESC></DESC>
+							</NODE>
+							<NODE ID=99 type="(Un)Bundle by Name">
+								<DESC></DESC>
+							</NODE>
+							<NODE ID=182 type="CtlRefConst" name="图例与游标宽度">
+								<DESC></DESC>
+							</NODE>
+							<NODE ID=140 type="Property Node">
+								<DESC></DESC>
+							</NODE>
+							<NODE ID=140 type="Property Node">
+								<DESC></DESC>
+							</NODE>
+							<NODE ID=99 type="(Un)Bundle by Name">
+								<DESC></DESC>
+							</NODE>
+						</BDCONTENT>
+					</NODE>
+				</BDCONTENT>
+			</NODE>
+		</BDCONTENT>
+	</NODE>
+	<NODE ID=47 type="Function" primID=54554853 primName="退出LabVIEW">
+		<DESC></DESC>
+	</NODE>
+	<CONTROL ID=80 type="数值常量" name="Y标尺总数">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+		</PARTS>
+	</CONTROL>
+	<NODE ID=182 type="CtlRefConst" name="DBC一览树形">
+		<DESC></DESC>
+	</NODE>
+	<LABEL><STEXT>V1.0</STEXT></LABEL>
+	<NODE ID=182 type="CtlRefConst" name="全部信号数组">
+		<DESC>0-Signal<LF>
+1-报文+ID<LF>
+2-ID（不带0x的16进制）<LF>
+3-起始位<LF>
+4-长度<LF>
+5-格式<LF>
+6-缩放系数<LF>
+7-偏移量<LF>
+8-最小值<LF>
+9-最大值<LF>
+10-单位<LF>
+11-节点</DESC>
+	</NODE>
+	<NODE ID=182 type="CtlRefConst" name="已选信号列表">
+		<DESC></DESC>
+	</NODE>
+</BDCONTENT>
+</VI>
+
+
